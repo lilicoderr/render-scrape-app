@@ -13,8 +13,8 @@ RUN npm install
 # Copiar el resto de los archivos
 COPY . .
 
-# Exponer el puerto 3000
-EXPOSE 3000
+# # Exponer el puerto 3000
+# EXPOSE 3000
 
 # Comando para ejecutar la app
 CMD ["node", "index.js"]
