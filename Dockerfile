@@ -1,20 +1,40 @@
-# Usar la imagen de Playwright con navegadores preinstalados
-FROM mcr.microsoft.com/playwright:v1.50.1-noble
+FROM node:18-slim
 
-# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar package.json y package-lock.json
 COPY package*.json ./
-
-# Instalar dependencias
 RUN npm install
 
-# Copiar el resto de los archivos
+# Playwright 브라우저 및 OS 라이브러리 설치
+RUN apt-get update && apt-get install -y \
+    wget \
+    ca-certificates \
+    fonts-liberation \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libasound2 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    libgbm1 \
+    libxfixes3 \
+    libxi6 \
+    libxtst6 \
+    libxrender1 \
+    libfontconfig1 \
+    libxcb1 \
+    libx11-6 \
+    libdbus-glib-1-2 \
+    libdrm2 \
+    libcups2 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npx playwright install --with-deps
+
 COPY . .
 
-# # Exponer el puerto 3000
-# EXPOSE 3000
-
-# Comando para ejecutar la app
 CMD ["node", "index.js"]
+
+EXPOSE 10000
