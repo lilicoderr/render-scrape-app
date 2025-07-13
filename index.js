@@ -21,12 +21,12 @@ const { chromium } = require("playwright");
     // 페이지로 이동
     await page.goto("https://everywak.kr/weather", {
       waitUntil: "networkidle", // 네트워크가 idle 상태일 때까지 기다림
-      timeout: 60000, // 타임아웃 60초로 늘리기
+      timeout: 600000, // 타임아웃 60초로 늘리기
     });
     console.log("Page loaded");
 
     // 페이지가 로드될 때까지 기다리기 (10초)
-    await page.waitForTimeout(10000); // 10초 기다리기
+    await page.waitForTimeout(100000); // 10초 기다리기
 
     // 페이지의 HTML을 가져오기
     const pageContent = await page.content();
